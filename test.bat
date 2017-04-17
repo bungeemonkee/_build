@@ -8,7 +8,7 @@ if not defined framework set framework=netcoreapp1.1
 if not defined configuration set configuration=Release
 
 set assembly=%project%\%project%.csproj
-set output=%project%\bin\%configuration%\%framework%
+set output=bin\%configuration%\%framework%
 
 %scripts%\OpenCover\OpenCover.Console.exe -returntargetcode -register:path32 -target:"dotnet.exe" -targetargs:"test --no-build --logger trx -c %configuration% -o %output% %assembly% " -output:coverage.xml -oldstyle
 if %errorlevel% neq 0 exit /b %errorlevel%
