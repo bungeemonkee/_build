@@ -13,10 +13,11 @@ set assembly=%project%\%project%.csproj
 set output=bin\%configuration%\%framework%
 
 %scripts%\OpenCover\OpenCover.Console.exe -returntargetcode -register:path32 -target:"dotnet.exe" -targetargs:"test --no-build --logger trx -c %configuration% -o %output% %assembly% " -output:coverage.xml -oldstyle
-if %errorlevel% neq 0 exit /b %errorlevel%
+set result=%errorlevel%
 
 powershell -File %scripts%\test-upload.ps1 -project %project%
 if %errorlevel% neq 0 exit /b %errorlevel%
+if %result% neq 0 exit /b %result%
 
 %scripts%\coveralls.io\coveralls.net.exe --opencover coverage.xml
 if %errorlevel% neq 0 exit /b %errorlevel%
