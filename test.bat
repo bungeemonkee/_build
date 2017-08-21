@@ -4,7 +4,9 @@ set scripts=%scripts:~0,-1%
 
 set project=%1%.Tests
 
-if not defined framework set framework=netcoreapp1.1
+if not "%2" == "" set framework=%2
+
+if not defined framework set framework=netcoreapp2.0
 if not defined configuration set configuration=Release
 
 set assembly=%project%\%project%.csproj
